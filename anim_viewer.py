@@ -40,7 +40,7 @@ while True:
     commands[megaman_state](curFrame)
     update_canvas()
     clear_canvas()
-    curFrame = (curFrame + 1) % 6
+    curFrame = (curFrame + 1) % 8
     megaman_state_prev = megaman_state
     delay(0.1)
 
