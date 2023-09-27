@@ -28,6 +28,7 @@ def move_down(frame):
     megaman.clip_composite_draw(frame * 50, 0, 50, 80,0,'', megaPos[0], megaPos[1],100,100)
 megaman_state = 0
 megaman_state_prev = 0
+
 def input_handler():
     global dx,dy
     global prevX,prevY
