@@ -31,6 +31,7 @@ megaman_state_prev = 0
 def input_handler():
     global dx,dy
     global prevX,prevY
+    global running
     events = get_events()
     for eve in events:
         if eve.type == SDL_KEYDOWN:
@@ -42,6 +43,8 @@ def input_handler():
                 dy += 1
             elif eve.key == SDLK_DOWN:
                 dy -= 1
+            elif eve.key == SDLK_ESCAPE:
+                running = False
         elif eve.type == SDL_KEYUP:
             if eve.key == SDLK_RIGHT:
                 prevX = dx
@@ -79,19 +82,22 @@ commands = {0:idleLeft_anim,1:idleRight_anim,2:runLeft_anim,3:runRight_anim,4:ju
 dx,dy=0,0
 speed = 10
 prevX,prevY = -1,-1
+running = True
 while True:
     input_handler()
+    if not running:
+        break
     update_state()
     megaPos[0] += dx * speed
     megaPos[1] += dy * speed
     if IsCollision(megaPos,50):
         megaPos[0] -= dx * speed
         megaPos[1] -= dy * speed
-    backGround.draw(TUK_WIDTH//4,TUK_HEIGHT//4)
+    backGround.composite_draw(0,'',400,300,800,600)
     commands[megaman_state](curFrame)
 
     update_canvas()
     clear_canvas()
     curFrame = (curFrame + 1) % 8
     delay(0.02)
-
+close_canvas()
