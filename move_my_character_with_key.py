@@ -128,3 +128,4 @@ while True:
     curFrame = (curFrame + 1) % 8
     delay(0.02)
 close_canvas()
+
